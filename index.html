@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet" />
+    <title>Serious Business</title>
+</head>
+<body>
+    <div class="container">
+        <div class="column-1">
+            <h1>Opening Hours</h1>
+            <table id="openingHoursTable">
+                <tr id="monday">
+                    <td>Monday</td>
+                    <td>9.00</td>
+                    <td>-</td>
+                    <td>18.00</td>
+                </tr>
+                <tr id="tuseday">
+                    <td>Tuseday</td>
+                    <td>11.00</td>
+                    <td>-</td>
+                    <td>18.00</td>
+                </tr>
+                <tr id="wednesday">
+                    <td>wednesday</td>
+                    <td>9.00</td>
+                    <td>-</td>
+                    <td>18.00</td>
+                </tr>
+                <tr id="thursday">
+                    <td>Thursday</td>
+                    <td>9.00</td>
+                    <td>-</td>
+                    <td>18.00</td>
+                </tr>
+                <tr id="friday">
+                    <td>Friday</td>
+                    <td>Closed</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="saturday">
+                    <td>Saturday</td>
+                    <td>9.00</td>
+                    <td>-</td>
+                    <td>18.00</td>
+                </tr>
+                <tr id="sunday">
+                    <td>Sunday</td>
+                    <td>closed</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="column-2">
+            <div class="displaydate">
+                We are <span id="officeStatus"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        //get current date
+        var currentDate = new Date();
+        var dayCount = currentDate.getDay();
+        var hourNow = currentDate.getHours();
+        var minutesNow = currentDate.getMinutes();
+        var timeNow = hourNow + "." + minutesNow ;
+
+        //get opening hours
+        let status = document.getElementById('officeStatus');
+        var mytable = document.getElementById('openingHoursTable');
+        var startTime = mytable.rows[dayCount - 1].cells[1].innerHTML;
+        var endTime = mytable.rows[dayCount - 1].cells[3].innerHTML;
+
+        //check whether business is open or closed
+        if(isNaN(startTime)){
+            status.innerHTML= "closed";
+        }else if(timeNow < startTime || timeNow > endTime) {
+            status.innerHTML= "closed";
+        } else {
+            status.innerHTML= "open";
+        }
+
+        
+
+        
+
+        
+    </script>
+</body>
+</html>
