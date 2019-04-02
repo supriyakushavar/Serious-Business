@@ -6,6 +6,11 @@ body{
     font-size: 18px;
 }
 
+#digiClock{
+    text-align: center;
+    font-size: 30px;
+}
+
 .container{
     display: flex;
     justify-content: space-around;

@@ -8,6 +8,7 @@
     <title>Serious Business</title>
 </head>
 <body>
+    <div id="digiClock"></div>
     <div class="container">
         <div class="column-1">
             <h1>Opening Hours</h1>
@@ -63,6 +64,21 @@
         </div>
     </div>
     <script>
+        function showTime(){
+            var currentDate = new Date();
+            var hourNow =  currentDate.getHours();
+            var minutesNow = currentDate.getMinutes();
+            var secondsNow = currentDate.getSeconds();
+            // another if format -- condition ? true : false
+            hourNow = (hourNow < 10) ? "0" + hourNow : hourNow;
+            minutesNow = (minutesNow < 10) ? "0" + minutesNow : minutesNow;
+            secondsNow = (secondsNow < 10) ? "0" + secondsNow : secondsNow;
+            var digiTime = hourNow + ":" + minutesNow + ":" + secondsNow;
+            document.getElementById("digiClock").innerHTML = digiTime;
+            setTimeout(showTime,1000);
+        }
+        showTime();
+
         //get current date
         var currentDate = new Date();
         var dayCount = currentDate.getDay();
