@@ -72,21 +72,20 @@
         var dayCount = currentDate.getDay();
         var hourNow = currentDate.getHours();
         var minutesNow = currentDate.getMinutes();
-        var timeNow = hourNow + "." + minutesNow ;
         hourNow = (hourNow < 10) ? "0" + hourNow : hourNow;
         minutesNow = (minutesNow < 10) ? "0" + minutesNow : minutesNow;
+        var timeNow = hourNow + "." + minutesNow ;
         //get opening hours
         let status = document.getElementById('officeStatus');
         let mytable = document.getElementById('openingHoursTable');
         let startTime = mytable.rows[dayCount - 1].cells[1].innerHTML;
         var endTime = mytable.rows[dayCount - 1].cells[3].innerHTML;
-        
+        mytable.rows[dayCount - 1].style.backgroundColor="#78a4bb";
         function officeStatus(){
-            console.log(endTime);
             //check whether business is open or closed
             if(isNaN(startTime)){
                 status.innerHTML= "closed";
-            }else if(timeNow < startTime || timeNow > endTime ) {
+            }else if( (timeNow < startTime) || (timeNow > endTime) || (timeNow == endTime)    ) {
                 status.innerHTML= "closed";
             } else {
                 status.innerHTML= "open";
@@ -118,8 +117,7 @@
             var changeTime = mytable.rows[dayCount - 1].cells[3];
             changeTime.innerHTML = timeNow;
             changeTime.style.backgroundColor = "red";
-            let endTime = mytable.rows[dayCount - 1].cells[3].innerHTML;
-            console.log(endTime);
+            endTime = timeNow;
             setTimeout(officeStatus, 1000);
         }
     </script>
