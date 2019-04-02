@@ -16,21 +16,31 @@ body{
 
 
 .displaydate{
-    margin: 40px 0;
-    border: 5px solid green;
+    margin: 90px 0;
+    border: 5px solid #4d97bd;
     padding: 20px;
     text-align: center;
+    width: 400px;
+    font-size: 25px;
 }
 
 
 table {
-    border: 1px solid black;
+    background: #4d97bd;
+    border: 5px solid #ddd;
+    border-collapse: collapse;
+    font-size: 20px;
 }
 
-td{
-    border-bottom: 1px solid #000;
+
+th, td {
+    border-bottom: 1px solid #ddd;
 }
 
 th , td{
-    padding: 15px;
+    padding: 20px;
+}
+
+tr:nth-child(5) , tr:nth-child(7){
+    background: #78a4bb;
 }
