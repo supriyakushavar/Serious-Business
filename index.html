@@ -61,9 +61,41 @@
             <div class="displaydate">
                 We are  <span id="officeStatus"></span>  now
             </div>
+            <button id="close">
+                Close Early
+            </button>
         </div>
     </div>
     <script>
+        //get current date
+        var currentDate = new Date();
+        var dayCount = currentDate.getDay();
+        var hourNow = currentDate.getHours();
+        var minutesNow = currentDate.getMinutes();
+        var timeNow = hourNow + "." + minutesNow ;
+        hourNow = (hourNow < 10) ? "0" + hourNow : hourNow;
+        minutesNow = (minutesNow < 10) ? "0" + minutesNow : minutesNow;
+        //get opening hours
+        let status = document.getElementById('officeStatus');
+        let mytable = document.getElementById('openingHoursTable');
+        let startTime = mytable.rows[dayCount - 1].cells[1].innerHTML;
+        var endTime = mytable.rows[dayCount - 1].cells[3].innerHTML;
+        
+        function officeStatus(){
+            console.log(endTime);
+            //check whether business is open or closed
+            if(isNaN(startTime)){
+                status.innerHTML= "closed";
+            }else if(timeNow < startTime || timeNow > endTime ) {
+                status.innerHTML= "closed";
+            } else {
+                status.innerHTML= "open";
+            }
+        }
+        officeStatus();
+        
+        
+        // code for digital clock
         function showTime(){
             var currentDate = new Date();
             var hourNow =  currentDate.getHours();
@@ -78,34 +110,18 @@
             setTimeout(showTime,1000);
         }
         showTime();
-
-        //get current date
-        var currentDate = new Date();
-        var dayCount = currentDate.getDay();
-        var hourNow = currentDate.getHours();
-        var minutesNow = currentDate.getMinutes();
-        var timeNow = hourNow + "." + minutesNow ;
-
-        //get opening hours
-        let status = document.getElementById('officeStatus');
-        var mytable = document.getElementById('openingHoursTable');
-        var startTime = mytable.rows[dayCount - 1].cells[1].innerHTML;
-        var endTime = mytable.rows[dayCount - 1].cells[3].innerHTML;
-
-        //check whether business is open or closed
-        if(isNaN(startTime)){
-            status.innerHTML= "closed";
-        }else if(timeNow < startTime || timeNow > endTime) {
-            status.innerHTML= "closed";
-        } else {
-            status.innerHTML= "open";
+        
+        //code to update close early time
+        var button = document.getElementById("close");
+        button.addEventListener("click", changeCloseTime);
+        function changeCloseTime(){
+            var changeTime = mytable.rows[dayCount - 1].cells[3];
+            changeTime.innerHTML = timeNow;
+            changeTime.style.backgroundColor = "red";
+            let endTime = mytable.rows[dayCount - 1].cells[3].innerHTML;
+            console.log(endTime);
+            setTimeout(officeStatus, 1000);
         }
-
-        
-
-        
-
-        
     </script>
 </body>
 </html>
